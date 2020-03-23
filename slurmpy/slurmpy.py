@@ -162,7 +162,11 @@ class Slurm(object):
         job_id = None
         for itry in range(1, tries + 1):
             args = [_cmd]
-            args.append( "--dependency=afterok:{}".format( ":".join([ str(d) for d in depends_on ]) ) )
+            if depends_on:
+		d=[]
+                for dependency in depends_on:
+                    d.append(str(dependency))
+                args.append( "--dependency=afterok:{}".format( ":".join(d) ) )
 
             if itry > 1:
                 mid = "--dependency=afternotok:%d" % job_id
