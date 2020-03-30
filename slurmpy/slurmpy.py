@@ -163,7 +163,7 @@ class Slurm(object):
         for itry in range(1, tries + 1):
             args = [_cmd]
             if depends_on:
-		d=[]
+                d=[]
                 for dependency in depends_on:
                     d.append(str(dependency))
                 args.append( "--dependency=afterok:{}".format( ":".join(d) ) )
